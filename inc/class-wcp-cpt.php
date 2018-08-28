@@ -1,5 +1,8 @@
 <?php
 
+/* --------------------------------------------------------------
+AGREGAR CUSTOM POST TYPE PARA SLIDES
+-------------------------------------------------------------- */
 $labels = array(
     'name'                  => _x( 'Slides', 'Post Type General Name', 'wordpress-carousel-poster' ),
     'singular_name'         => _x( 'Slide', 'Post Type Singular Name', 'wordpress-carousel-poster' ),
@@ -49,5 +52,57 @@ $args = array(
     'capability_type'       => 'post',
     'show_in_rest'          => true,
 );
+
 register_post_type( 'wcp-slide', $args );
 
+/* --------------------------------------------------------------
+AGREGAR METABOX PARA EL CAMPO DEL LINK
+-------------------------------------------------------------- */
+
+/* AGREGO EL METABOX */
+add_action( 'add_meta_boxes', 'wcp_custom_metabox' );
+function wcp_custom_metabox()
+{
+    add_meta_box( 'wcp-metabox', 'Datos Adicionales del Slide', 'wcp_meta_box_cb', 'wcp-slide', 'normal', 'high' );
+}
+
+/* AGREGO EL POST META */
+function wcp_meta_box_cb( $post )
+{
+    $values = get_post_custom( $post->ID );
+    $text = isset( $values['wcp_slide_link'] ) ? esc_attr( $values['wcp_slide_link'][0] ) : '';
+
+    // We'll use this nonce field later on when saving.
+    wp_nonce_field( 'wcp_meta_box_nonce', 'meta_box_nonce' );
+?>
+<p>
+    <label for="wcp_slide_link">Link del Slide:</label>
+    <input type="text" name="wcp_slide_link" id="wcp_slide_link" value="<?php echo $text; ?>" class="text" size="100" />
+</p>
+<?php
+}
+
+/* GUARDO EL POST META */
+add_action( 'save_post', 'wcp_meta_box_save' );
+function wcp_meta_box_save( $post_id )
+{
+    // Bail if we're doing an auto save
+    if( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+
+    // if our nonce isn't there, or we can't verify it, bail
+    if( !isset( $_POST['meta_box_nonce'] ) || !wp_verify_nonce( $_POST['meta_box_nonce'], 'wcp_meta_box_nonce' ) ) return;
+
+    // if our current user can't edit this post, bail
+    if( !current_user_can( 'edit_post' ) ) return;
+
+    // now we can actually save the data
+    $allowed = array(
+        'a' => array( // on allow a tags
+            'href' => array() // and those anchors can only have href attribute
+        )
+    );
+
+    // Make sure your data is set before trying to save it
+    if( isset( $_POST['wcp_slide_link'] ) )
+        update_post_meta( $post_id, 'wcp_slide_link', wp_kses( $_POST['wcp_slide_link'], $allowed ) );
+}

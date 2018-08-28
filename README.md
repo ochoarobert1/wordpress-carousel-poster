@@ -1,4 +1,4 @@
-![alt tag](images/repo-logo.jpg)
+![alt tag](img/repo-logo.jpg)
 
 # Wordpress Carousel Poster #
 

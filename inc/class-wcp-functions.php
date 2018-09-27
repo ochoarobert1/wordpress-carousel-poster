@@ -16,6 +16,37 @@ CUSTOM AREA FOR OPTIONS DATA - WCP
 
 add_menu_page( __('Carousel Slider', 'wordpress-carousel-poster'), __('Carousel Slider', 'wordpress-carousel-poster'), 'manage_options', 'wordpress-carousel-poster-admin', 'wcp_admin_dashboard_function', 'dashicons-slides' , 0 );
 add_submenu_page( 'wordpress-carousel-poster-admin', __( 'Slides', 'wordpress-carousel-poster' ), __( 'Slides', 'wordpress-carousel-poster' ), 'manage_options', 'edit.php?post_type=wcp-slide');
+add_submenu_page( 'wordpress-carousel-poster-admin', __( 'Sliders', 'wordpress-carousel-poster' ), __( 'Sliders', 'wordpress-carousel-poster' ), 'manage_options', 'edit-tags.php?taxonomy=wcp-slide-selector');
+
+
+/* --------------------------------------------------------------
+ADMIN DASHBOARD - WCP
+-------------------------------------------------------------- */
+
+function wcp_admin_dashboard_function() {
+?>
+<div class="wcp-admin-header">
+    <h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+</div>
+<div class="wcp-admin-content">
+    <h3><?php _e('Instrucciones de Uso:', 'wordpress-carousel-poster'); ?></h3>
+    <div class="wcp-admin-content-text">
+        <ol>
+            <li>Agregar los Slides con su fotografía y link de enlace.</li>
+            <li>Crear un Slider al cual asignar varios Slides.</li>
+            <li>Usar el siguiente shortcode para ingresar el slider:</li>
+        </ol>
+        <pre>
+       [wcp-slider cantidad=5 slider="nombre_del_slider"]
+   </pre>
+        <p>En la cual: La cantidad se puede asignar cambiando el número.</p>
+        <p>Slider asignará que serie de slides asignados debe mostrarse.</p>
+
+
+    </div>
+</div>
+<?php
+                                        }
 
 
 /* --------------------------------------------------------------

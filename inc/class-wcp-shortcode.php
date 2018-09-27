@@ -11,8 +11,10 @@ add_shortcode( 'wcp-slider', 'wcp_slider_shortcode' );
 function wcp_slider_shortcode($args, $content) {
     $atts = shortcode_atts( array(
         'cantidad' => 'cantidad',
+        'slider'   => 'slider'
     ), $atts, 'wcp-slider' );
     $number = (empty($args['cantidad'])) ? 5 : $args['cantidad'];
+    $slider = (empty($args['slider'])) ? '' : $args['slider'];
 
     /* GENERAR EL SCRIPT PARA CREAR EL SLIDER */
     if( wp_script_is( 'jquery', 'done' ) ) {
@@ -49,7 +51,7 @@ function wcp_slider_shortcode($args, $content) {
 <?php
     }
     /* GENERAR LA DATA PARA RELLENAR EL SLIDER */
-    $args = array('post_type' => 'wcp-slide', 'posts_per_page' => $number, 'order' => 'DESC', 'orderby' => 'date');
+    $args = array('post_type' => 'wcp-slide', 'posts_per_page' => $number, 'order' => 'DESC', 'orderby' => 'date', 'tax_query' => array( array( 'taxonomy' => 'wcp-slide-selector', 'field' => 'slug', 'terms' => $slider )));
     query_posts($args);
     if (have_posts()) :
     $content .= '<div class="owl-carousel owl-theme">';

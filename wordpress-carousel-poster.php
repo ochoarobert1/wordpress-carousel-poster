@@ -3,7 +3,7 @@
  * Plugin Name: WordPress Carousel Poster
  * Plugin URI: http://robertochoa.com.ve
  * Description: Plugin para carousel via OwlCarousel adjuntado a un custom post type
- * Version: 1.0.0
+ * Version: 1.2.0
  * Author: Robert Ochoa
  * Author URI: http://robertochoa.com.ve
  * License: GPL2+

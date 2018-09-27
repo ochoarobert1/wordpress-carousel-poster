@@ -56,6 +56,45 @@ $args = array(
 register_post_type( 'wcp-slide', $args );
 
 /* --------------------------------------------------------------
+AGREGAR TAXONOMY PARA SLIDES
+-------------------------------------------------------------- */
+
+$labels = array(
+    'name'                       => _x( 'Sliders', 'Taxonomy General Name', 'wordpress-carousel-poster' ),
+    'singular_name'              => _x( 'Slider', 'Taxonomy Singular Name', 'wordpress-carousel-poster' ),
+    'menu_name'                  => __( 'Sliders', 'wordpress-carousel-poster' ),
+    'all_items'                  => __( 'Todos los Sliders', 'wordpress-carousel-poster' ),
+    'parent_item'                => __( 'Slider Padre', 'wordpress-carousel-poster' ),
+    'parent_item_colon'          => __( 'Slider Padre', 'wordpress-carousel-poster' ),
+    'new_item_name'              => __( 'Nuevo Slider', 'wordpress-carousel-poster' ),
+    'add_new_item'               => __( 'Agregar Nuevo Slider', 'wordpress-carousel-poster' ),
+    'edit_item'                  => __( 'Editar Slider', 'wordpress-carousel-poster' ),
+    'update_item'                => __( 'Actualizar Slider', 'wordpress-carousel-poster' ),
+    'view_item'                  => __( 'Ver Slider', 'wordpress-carousel-poster' ),
+    'separate_items_with_commas' => __( 'Separar Sliders por Comas', 'wordpress-carousel-poster' ),
+    'add_or_remove_items'        => __( 'Agregar o Remover Slider', 'wordpress-carousel-poster' ),
+    'choose_from_most_used'      => __( 'Usar de los mas usados', 'wordpress-carousel-poster' ),
+    'popular_items'              => __( 'Slider Populares', 'wordpress-carousel-poster' ),
+    'search_items'               => __( 'Buscar Slider', 'wordpress-carousel-poster' ),
+    'not_found'                  => __( 'No hay resultados', 'wordpress-carousel-poster' ),
+    'no_terms'                   => __( 'No hay Sliders', 'wordpress-carousel-poster' ),
+    'items_list'                 => __( 'Listado de Slider', 'wordpress-carousel-poster' ),
+    'items_list_navigation'      => __( 'Navegación del Listado de Sliders', 'wordpress-carousel-poster' ),
+);
+$args = array(
+    'labels'                     => $labels,
+    'hierarchical'               => true,
+    'public'                     => true,
+    'show_ui'                    => true,
+    'show_admin_column'          => true,
+    'show_in_nav_menus'          => true,
+    'show_tagcloud'              => true,
+    'show_in_rest'               => true,
+);
+
+register_taxonomy( 'wcp-slide-selector', array( 'wcp-slide' ), $args );
+
+/* --------------------------------------------------------------
 AGREGAR METABOX PARA EL CAMPO DEL LINK
 -------------------------------------------------------------- */
 

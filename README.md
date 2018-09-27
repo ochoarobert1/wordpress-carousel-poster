@@ -2,7 +2,7 @@
 
 # Wordpress Carousel Poster #
 
-* Version: 1.0.0
+* Version: 1.2.0
 * Design: [Robert Ochoa](http://www.robertochoa.com.ve/)
 * Development: [Robert Ochoa](http://www.robertochoa.com.ve/)
 
@@ -26,7 +26,7 @@ Plugin desarrollado para generar un slider generado por la biblioteca de Owl Car
 3. Generar el shortcode apropiado:
 
 ```
-[wcp-slider cantidad=5]
+[wcp-slider cantidad=5 slider="nombre_del_slider"]
 ```
 
 ### Contacto ###
